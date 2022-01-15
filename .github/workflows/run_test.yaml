@@ -1,0 +1,11 @@
+name: example
+
+on: push
+
+jobs:
+  job_1:
+    name: simple experiment
+    runs-on: ubuntu-latest
+    steps:
+      - name: first step
+        run: "echo "running"
