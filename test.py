@@ -23,7 +23,7 @@ def run_test():
 
         #SUB
         assert test3.uint_sub(test2) == my_uint(3, 0x1)
-        assert test5.uint_sub(test1) == my_uint(17, 0xbebe)
+        assert test5.uint_sub(test1) == my_uint(17, 0xbeb)
         assert test7.uint_sub(test6) == my_uint(81, 0x1a5ae7ea476ffdd43fb6)
         assert test9.uint_sub(test8) == my_uint(241, 0x2496ba3b71e77e652090b88ed8d5ff6fc52fd16915c21d2f576360aa392b)
 
