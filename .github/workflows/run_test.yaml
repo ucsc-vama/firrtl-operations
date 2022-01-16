@@ -8,4 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: first step
-        run: python test.py
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python
