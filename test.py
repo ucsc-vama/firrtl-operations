@@ -175,7 +175,7 @@ def run_test():
         assert test4.uint_tail(10) == my_uint(6, 0x3e)
         assert test9.uint_tail(10) == my_uint(230, 0x3aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714)
 
-        print("all tests completed")
+        print("all tests completed successfully")
 
 def main():
     run_test()
