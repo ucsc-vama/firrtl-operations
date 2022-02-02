@@ -176,8 +176,5 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test4.uint_tail(10), my_uint(6, 0x3e))
         self.assertEqual(test9.uint_tail(10), my_uint(230, 0x3aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714))
 
-def main():
-    run_test()
-
 if __name__=="__main__":
     unittest.main()
