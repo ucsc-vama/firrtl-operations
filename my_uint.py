@@ -16,7 +16,14 @@ class my_uint:
         return my_uint(max(self.bitsize,other.bitsize)+1, self.value+other.value)
 
     def uint_sub(self, other):
-        return my_uint(max(self.bitsize,other.bitsize)+1, self.value-other.value)
+        comp = self.value - other.value
+        size = max(self.bitsize, other.bitsize)
+        if (comp < 0):
+            result = (abs(comp) ^ ((1<<size)-1))+1#2s complement
+            result += (1<<size)
+            return my_uint(size+1, result)
+        else:
+            return my_uint(size+1, comp)
 
     def uint_mul(self, other):
         return my_uint(self.bitsize+other.bitsize, self.value*other.value)
