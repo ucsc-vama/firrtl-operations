@@ -163,12 +163,15 @@ class my_uint:
             return my_uint(self.bitsize-n, self.value & (2**(self.bitsize-n)-1))
         return my_uint(0,0)
 
+    def tohex(self):
+        mask = (1<<self.bitsize)-1
+        return hex(mask & self.value)
+
     def print_bits(self):
         i=0
         if self.bitsize%4 == 0: #reduce bit
             i = -1
         result = "u("
-        #result+="{0:#0{1}x}".format(self.value,math.floor(self.bitsize/4)+1+i+2)
-        result += hex(self.value)
+        result += self.tohex()
         result += ")"
-        print(result, self.bitsize)
+        print(self.bitsize, result)
