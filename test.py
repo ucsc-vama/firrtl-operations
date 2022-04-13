@@ -17,8 +17,8 @@ test9 = my_uint(240, 0xd23aa349017b3ae3cba396810bef3910f931065a390bce31891009cee
 class TestOperations(unittest.TestCase):
 
     def test_add(self):
-        self.assertEqual(test1.uint_add(test2), my_uint(2, 0x1))
-        self.assertEqual(test2.uint_add(test3), my_uint(3, 0x3))
+        self.assertEqual(test1.uint_add(test2), my_uint(1, 0x1))
+        self.assertEqual(test2.uint_add(test3), my_uint(2, 0x3))
         self.assertEqual(test4.uint_add(test5), my_uint(17, 0x189bc))
         self.assertEqual(test7.uint_add(test8), my_uint(241, 0xada3e90d8f93bc7eab12ddf2331939a1340134f160ed9a0fc14054378022))
 
