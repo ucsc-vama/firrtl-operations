@@ -13,8 +13,7 @@ class my_uint:
         return False
 
     def uint_add(self, other):
-        num = self.value+other.value
-        return my_uint(num.bit_length(), num)
+        return my_uint(max(self.bitsize,other.bitsize)+1, self.value+other.value)
 
     def uint_sub(self, other):
         comp = self.value - other.value
