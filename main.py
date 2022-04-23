@@ -1,8 +1,8 @@
 from my_sint import *
 from my_uint import *
 
-a = my_uint(16, 0xf3)
-b = my_uint(16, 0x3)
+a = my_uint(1, 0x1)
+b = my_uint(1, 0x0)
 c = a.uint_sub(b)
 
 c.print_bits()
