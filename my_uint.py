@@ -13,11 +13,7 @@ class my_uint:
         return False
 
     def uint_add(self, other):
-        if self.value == 0 or other.bitsize == 0:
-            resbitsize = max(self.bitsize,other.bitsize)
-        else:
-            resbitsize = max(self.bitsize,other.bitsize)+1
-        return my_uint(resbitsize, self.value+other.value)
+        return my_uint(max(self.bitsize,other.bitsize)+1, self.value+other.value)
 
     def uint_sub(self, other):
         comp = self.value - other.value
@@ -81,9 +77,6 @@ class my_uint:
 
     def uint_asSint(self): #
         return my_sint(self.bitsize, self.value)
-
-    def uint_asClock(self): # not relevant
-        return self
     
     def uint_shl(self, n):
         num = self.value << n
@@ -94,8 +87,7 @@ class my_uint:
         return my_uint(max(self.bitsize-n, 1), num)
 
     def uint_dshl(self, other):
-        num = self.value >> other.value
-        num = num << other.value
+        num = self.value << other.value
         return my_uint(self.bitsize + 2**other.bitsize -1, num)
 
     def uint_dshr(self, other): 
@@ -105,7 +97,7 @@ class my_uint:
     def uint_cvt(self): #
         return my_sint(self.bitsize+1, self.value)
 
-    def uint_neg(self):
+    def uint_neg(self): #
         result = 0
         for i in range(self.bitsize):
             result |= ((~self.value>>i)&1) << i
@@ -172,10 +164,7 @@ class my_uint:
         return hex(mask & self.value)
 
     def print_bits(self):
-        i=0
-        if self.bitsize%4 == 0: #reduce bit
-            i = -1
         result = "u("
-        result += self.tohex()
+        result += str(hex(self.value))#self.tohex()
         result += ")"
         print(self.bitsize, result)
