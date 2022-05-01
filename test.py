@@ -98,9 +98,9 @@ class TestOperations(unittest.TestCase):
 
     def test_dshl(self):
         self.assertEqual(test2.uint_dshl(test1), my_uint(2, 0x1))
-        self.assertEqual(test3.uint_dshl(test2), my_uint(3, 0x2))
-        self.assertEqual(test4.uint_dshl(test3), my_uint(19, 0xcafc))
-        self.assertEqual(test8.uint_dshl(test3), my_uint(243, 0xada3e90d8f93bc7eab12ddf2331939a1340134f12349b10231aca924ade8))
+        self.assertEqual(test3.uint_dshl(test2), my_uint(3, 0x4))
+        self.assertEqual(test4.uint_dshl(test3), my_uint(19, 0x32bf8))
+        self.assertEqual(test8.uint_dshl(test3), my_uint(243, 0x2b68fa4363e4ef1faac4b77c8cc64e684d004d3c48d26c408c6b2a492b7a4))
 
     def test_dshr(self):
         self.assertEqual(test1.uint_dshr(test2), my_uint(1, 0x0))
