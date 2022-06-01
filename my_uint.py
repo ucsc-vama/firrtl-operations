@@ -146,7 +146,7 @@ class my_uint:
 
     def uint_bits(self, hi, lo):
         if hi > lo and hi < self.bitsize:
-            return my_uint(hi-lo+1, (self.value>>(self.bitsize-hi-1))&(2**(hi-lo+1)-1))
+            return my_uint(hi-lo+1, (self.value>>lo)&(2**(hi-lo+1)-1))
         return my_uint(0,0)
 
     def uint_head(self, n):
