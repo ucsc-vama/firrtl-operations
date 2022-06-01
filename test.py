@@ -163,8 +163,8 @@ class TestOperations(unittest.TestCase):
 
     def test_bits(self):
         self.assertEqual(test1.uint_bits(5, 1), my_uint(0, 0x0))
-        self.assertEqual(test4.uint_bits(5, 1), my_uint(5, 0x12))
-        self.assertEqual(test9.uint_bits(5, 1), my_uint(5, 0x14))
+        self.assertEqual(test4.uint_bits(5, 1), my_uint(5, 0x1f))
+        self.assertEqual(test9.uint_bits(5, 1), my_uint(5, 0xa))
 
     def test_head(self):
         self.assertEqual(test1.uint_head(5), my_uint(0, 0x0))
