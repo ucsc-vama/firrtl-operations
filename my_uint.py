@@ -155,7 +155,7 @@ class my_uint:
         return my_uint(0,0)
 
     def uint_tail(self, n):
-        if n > 0 and n <= self.bitsize:
+        if self.bitsize > n:
             return my_uint(self.bitsize-n, self.value & (2**(self.bitsize-n)-1))
         return my_uint(0,0)
 
