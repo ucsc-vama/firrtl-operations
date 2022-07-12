@@ -2,10 +2,14 @@ from model_sint import *
 
 class model_uint:
     def __init__(self, bitsize=None, value=0):
-        if bitsize != None:
-            self.bitsize = bitsize
-        else:
-            self.bitsize = len(bin(value)[2:])
+        # truebitsize = len(bin(value)[2:])
+        # if bitsize == None:
+        #     self.bitsize = truebitsize
+        # elif bitsize != truebitsize:
+        #     # assert("incorrect bitsize given")
+        #     print("incorrect bit")
+        # read readme
+        self.bitsize = bitsize
         self.value = value
 
     def __eq__ (self, other):
