@@ -80,11 +80,11 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.uint_pad(5), model_uint(5, 0x0))
         self.assertEqual(test4.uint_pad(2), model_uint(16, 0xcafe))
 
-    #def test_asSint(self):
-        #self.assertEqual(test1.uint_asSint(), my_sint(1, 0x0))
-        #self.assertEqual(test2.uint_asSint(), my_sint(1, 0x0))
-        #self.assertEqual(test4.uint_asSint(), my_sint(16, 0x0))
-        #self.assertEqual(test9.uint_asSint(), my_sint(80, 0x0))
+    # #def test_asSint(self):
+    #     #self.assertEqual(test1.uint_asSint(), my_sint(1, 0x0))
+    #     #self.assertEqual(test2.uint_asSint(), my_sint(1, 0x0))
+    #     #self.assertEqual(test4.uint_asSint(), my_sint(16, 0x0))
+    #     #self.assertEqual(test9.uint_asSint(), my_sint(80, 0x0))
 
     def test_shl(self):
         self.assertEqual(test1.uint_shl(1), model_uint(2, 0x0))
@@ -162,17 +162,17 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test9.uint_cat(test6), model_uint(320, 0xd23aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714234901234823ad3e9283))
 
     def test_bits(self):
-        self.assertEqual(test1.uint_bits(5, 1), model_uint(0, 0x0))
+        self.assertEqual(test1.uint_bits(5, 1), model_uint(1, 0x0))
         self.assertEqual(test4.uint_bits(5, 1), model_uint(5, 0x1f))
         self.assertEqual(test9.uint_bits(5, 1), model_uint(5, 0xa))
 
     def test_head(self):
-        self.assertEqual(test1.uint_head(5), model_uint(0, 0x0))
+        self.assertEqual(test1.uint_head(5), model_uint(1, 0x0))
         self.assertEqual(test4.uint_head(5), model_uint(5, 0x19))
         self.assertEqual(test9.uint_head(5), model_uint(5, 0x1a))
 
     def test_tail(self):
-        self.assertEqual(test1.uint_tail(10), model_uint(0, 0x0))
+        self.assertEqual(test1.uint_tail(10), model_uint(1, 0x0))
         self.assertEqual(test4.uint_tail(10), model_uint(6, 0x3e))
         self.assertEqual(test9.uint_tail(10), model_uint(230, 0x3aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714))
 

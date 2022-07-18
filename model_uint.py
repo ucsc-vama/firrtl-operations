@@ -1,3 +1,4 @@
+from math import *
 from model_sint import *
 
 class model_uint:
@@ -9,6 +10,13 @@ class model_uint:
         #     # assert("incorrect bitsize given")
         #     print("incorrect bit")
         # read readme
+        if value > 0:
+            realbitsize = floor(log2(value))+1
+        else:
+            realbitsize = 1
+        if bitsize < realbitsize:
+            # assert("incorrect bitsize given")
+            print("incorrect bitsize")
         self.bitsize = bitsize
         self.value = value
 
@@ -153,17 +161,17 @@ class model_uint:
     def uint_bits(self, hi, lo):
         if hi > lo and hi < self.bitsize:
             return model_uint(hi-lo+1, (self.value>>lo)&(2**(hi-lo+1)-1))
-        return model_uint(0,0)
+        return model_uint(1,0)
 
     def uint_head(self, n):
         if n > 0 and n <= self.bitsize:
             return model_uint(n, self.value>>(self.bitsize-n))
-        return model_uint(0,0)
+        return model_uint(1,0)
 
     def uint_tail(self, n):
         if self.bitsize > n:
             return model_uint(self.bitsize-n, self.value & (2**(self.bitsize-n)-1))
-        return model_uint(0,0)
+        return model_uint(1,0)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1
