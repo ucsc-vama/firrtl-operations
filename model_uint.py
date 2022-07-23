@@ -1,23 +1,22 @@
 from math import *
 from model_sint import *
 
+def getbitsize(value):
+    # return len(bin(value)[2:])
+    return ceil(log2(value+1))
+
 class model_uint:
-    def __init__(self, bitsize=None, value=0):
-        # truebitsize = len(bin(value)[2:])
-        # if bitsize == None:
-        #     self.bitsize = truebitsize
-        # elif bitsize != truebitsize:
-        #     # assert("incorrect bitsize given")
-        #     print("incorrect bit")
-        # read readme
-        if value > 0:
-            realbitsize = floor(log2(value))+1
+    def __init__(self, bitsize=None, value=None):
+        if bitsize == None:
+            realbitsize = getbitsize(value)
         else:
-            realbitsize = 1
-        if bitsize < realbitsize:
-            # assert("incorrect bitsize given")
-            print("incorrect bitsize")
-        self.bitsize = bitsize
+            if value > 0:
+                realbitsize = getbitsize(value)
+            else:
+                realbitsize = 1
+            if bitsize < realbitsize:
+                print("incorrect bitsize")
+        self.bitsize = realbitsize
         self.value = value
 
     def __eq__ (self, other):

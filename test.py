@@ -159,7 +159,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.uint_cat(test2), model_uint(2, 0x1))
         self.assertEqual(test2.uint_cat(test3), model_uint(3, 0x6))
         self.assertEqual(test4.uint_cat(test5), model_uint(32, 0xcafebebe))
-        self.assertEqual(test9.uint_cat(test6), model_uint(320, 0xd23aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714234901234823ad3e9283))
+        self.assertEqual(test9.uint_cat(test6), model_uint(320, 0x348ea8d2405eceb8f2e8e5a042fbce443e4c41968e42f38c62440273b9c5234901234823ad3e9283))
 
     def test_bits(self):
         self.assertEqual(test1.uint_bits(5, 1), model_uint(1, 0x0))
