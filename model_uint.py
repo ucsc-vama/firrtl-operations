@@ -8,7 +8,7 @@ def getbitsize(value):
 class model_uint:
     def __init__(self, value, bitsize=None):
         if bitsize == None:
-            realbitsize = getbitsize(value)
+            bitsize = getbitsize(value)
         else:
             if value > 0:
                 realbitsize = getbitsize(value)
@@ -16,7 +16,7 @@ class model_uint:
                 realbitsize = 1
             if bitsize < realbitsize:
                 print("incorrect bitsize")
-        self.bitsize = realbitsize
+        self.bitsize = bitsize
         self.value = value
 
     def __eq__ (self, other):

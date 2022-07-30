@@ -17,7 +17,7 @@ test9 = model_uint(0xd23aa349017b3ae3cba396810bef3910f931065a390bce31891009cee71
 class TestOperations(unittest.TestCase):
 
     def test_add(self):
-        self.assertEqual(test1.uint_add(test2), model_uint(0x1, 1))
+        self.assertEqual(test1.uint_add(test2), model_uint(0x1, 2))
         self.assertEqual(test2.uint_add(test3), model_uint(0x3,3))
         self.assertEqual(test4.uint_add(test5), model_uint(0x189bc,17))
         self.assertEqual(test7.uint_add(test8), model_uint(0xada3e90d8f93bc7eab12ddf2331939a1340134f160ed9a0fc14054378022, 241))
@@ -159,7 +159,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.uint_cat(test2), model_uint(0x1,2))
         self.assertEqual(test2.uint_cat(test3), model_uint(0x6,3))
         self.assertEqual(test4.uint_cat(test5), model_uint(0xcafebebe,32))
-        self.assertEqual(test9.uint_cat(test6), model_uint(0x348ea8d2405eceb8f2e8e5a042fbce443e4c41968e42f38c62440273b9c5234901234823ad3e9283,320))
+        self.assertEqual(test9.uint_cat(test6), model_uint(0xd23aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714234901234823ad3e9283,320))
 
     def test_bits(self):
         self.assertEqual(test1.uint_bits(5, 1), model_uint(0x0,1))
@@ -172,7 +172,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test9.uint_head(5), model_uint(0x1a,5))
 
     def test_tail(self):
-        self.assertEqual(test1.uint_tail(10), model_uint(0x0,1))
+        self.assertEqual(test1.uint_tail(10), model_uint(0x0,10))
         self.assertEqual(test4.uint_tail(10), model_uint(0x3e,6))
         self.assertEqual(test9.uint_tail(10), model_uint(0x3aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714,230))
 
