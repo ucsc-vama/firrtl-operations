@@ -2,7 +2,8 @@ from math import *
 from model_sint import *
 
 def getbitsize(value):
-    # return len(bin(value)[2:])
+    if value == 0:
+        return 1
     return ceil(log2(value+1))
 
 class model_uint:
