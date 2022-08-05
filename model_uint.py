@@ -10,7 +10,7 @@ class model_uint:
     def __init__(self, value, bitsize=None):
         if bitsize == None:
             bitsize = getbitsize(value)
-        else:
+        elif bitsize != 0:
             if value > 0:
                 realbitsize = getbitsize(value)
             else:
@@ -164,14 +164,15 @@ class model_uint:
         return model_uint(0,1)
 
     def uint_head(self, n):
-        if n > 0 and n <= self.bitsize:
+        if n >= 0 and n <= self.bitsize:
             return model_uint(self.value>>(self.bitsize-n), n)
         return model_uint(0,1)
 
     def uint_tail(self, n):
         if self.bitsize > n:
             return model_uint(self.value & (2**(self.bitsize-n)-1), self.bitsize-n)
-        return model_uint(0,n)
+        print("tail: this should not happen")
+        return model_uint(0,0)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1
