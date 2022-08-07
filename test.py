@@ -174,6 +174,7 @@ class TestOperations(unittest.TestCase):
 
     def test_tail(self):
         self.assertEqual(test1.uint_tail(0), model_uint(0x0,1))
+        self.assertEqual(test3.uint_tail(2), model_uint(0x0,0))
         self.assertEqual(test4.uint_tail(10), model_uint(0x3e,6))
         self.assertEqual(test9.uint_tail(10), model_uint(0x3aa349017b3ae3cba396810bef3910f931065a390bce31891009cee714,230))
 

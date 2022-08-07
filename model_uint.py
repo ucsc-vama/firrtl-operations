@@ -169,6 +169,8 @@ class model_uint:
         return model_uint(0,1)
 
     def uint_tail(self, n):
+        if n == self.bitsize:
+            return model_uint(0,0)
         if self.bitsize > n:
             return model_uint(self.value & (2**(self.bitsize-n)-1), self.bitsize-n)
         print("tail: this should not happen")
