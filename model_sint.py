@@ -1,7 +1,7 @@
 from model_uint import *
 
 class model_sint:
-    def __init__(self, bitsize, value):
+    def __init__(self, value, bitsize):
         self.bitsize = bitsize
         self.value = value
 
@@ -12,4 +12,17 @@ class model_sint:
         return False
 
     def sint_add(self, other):
-        return model_uint(self.value+other.value, max(self.bitsize,other.bitsize)+1)
+        truelength = max(self.bitsize,other.bitsize)
+        val = (self.value + other.value) & (1<<truelength)-1
+        return model_sint(val, truelength+1)
+
+
+    def tohex(self):
+        mask = (1<<self.bitsize)-1
+        return hex(mask & self.value)
+
+    def print_bits(self):
+        result = "u("
+        result += str(hex(self.value))#self.tohex()
+        result += ")"
+        print(self.bitsize, result)
