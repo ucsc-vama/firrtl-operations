@@ -4,4 +4,5 @@ This repo tests several primitive operations referenced in chapter 7 of [firrtl]
 
 Test the repo by running test.py:
 
-    $ python -m unittest -v test.py
+    $ python -m unittest -v test_uint.py
+    $ python -m unittest -v test_uint.py
