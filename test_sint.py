@@ -31,17 +31,18 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test3.sint_sub(test4), model_sint(0x920de90671562700, 65))
         self.assertEqual(test4.sint_sub(test3), model_sint(0x16df216f98ea9d900, 65))
         self.assertEqual(test4.sint_sub(test3), model_sint(0x16df216f98ea9d900, 65))
-        # test2.sint_sub(test1).print_bits()
 
     def test_mul(self):
-        test1.sint_mul(test2).print_bits()
-        # self.assertEqual(test1.sint_mul(test2), model_sint(0xea028354, 32))
-    #     self.assertEqual(test3.sint_mul(test4), model_sint(0x5f7c3f3a3c3b3b04, 65))
-    #     self.assertEqual(test4.sint_mul(test4), model_sint(0x1c7e5a2a5d0a2a04, 65))
-    #     self.assertEqual(test5.sint_mul(test6), model_sint(0x2c6b1f6d8b6e1f4c90d8, 81))
-    #     self.assertEqual(test6.sint_mul(test6), model_sint(0x1e7e8a1c3d0e8f6e6dbb4, 81))
-    #     self.assertEqual(test7.sint_mul(test8), model_sint(0x2c7e5a2a5d0a2a04, 129))
-    #     self.assertEqual(test8.sint_mul(test8), model_sint(0x17e7e5a2a5d0a2a04, 129))
+        self.assertEqual(test1.sint_mul(test2), model_sint(0xea028354, 32))
+        self.assertEqual(test3.sint_mul(test4), model_sint(0xf16b880f2bad048691fd4b72a0e2da04, 128))
+        self.assertEqual(test5.sint_mul(test6), model_sint(0xfc6fe531cae4d5f834f4831b7dc6f5fbfee7f24c, 160))
+        self.assertEqual(test7.sint_mul(test8), model_sint(0xe3f0c77f6f1ce87a5d5735256c8addf7a2a5210cf49a1af0917e727f76d981a4, 256))
+
+    def test_div(self):
+        self.assertEqual(test1.sint_div(test2), model_sint(0x1fffe,17))
+        self.assertEqual(test3.sint_div(test4), model_sint(0x1fffffffffffffffd,65))
+        self.assertEqual(test3.sint_div(test1), model_sint(0x107b710ae332f,65))
+        self.assertEqual(test4.sint_div(test2), model_sint(0xa4c48cb11e2b,65))
 
 if __name__=="__main__":
     unittest.main()

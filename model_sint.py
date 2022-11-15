@@ -4,9 +4,9 @@ def two_comp(val, bits):
     val = val ^ ( (1 << bits) - 1)
     return (val +1)&((1<<bits)-1)
 
-def signed_subtract(a,b):
+def signed_subtract(a,b,bits):
     if b > a:
-        return two_comp(b-a)
+        return two_comp(b-a, bits)
     return a - b
 
 
@@ -35,9 +35,9 @@ class model_sint:
         if bsig == 1:
             b = two_comp(other.value, other.bitsize)
         if asig > bsig:
-            val = signed_subtract(b,a)
+            val = signed_subtract(b,a, maxbit+1)
         elif asig < bsig:
-            val = signed_subtract(a,b)
+            val = signed_subtract(a,b, maxbit+1)
         elif asig and bsig:
             val = a+b
             val = two_comp(val, maxbit+1)
@@ -46,6 +46,24 @@ class model_sint:
         return model_sint(val, maxbit+1)
 
     def sint_sub(self, other):
+        asig = (self.value >> (self.bitsize - 1)) & 1
+        bsig = (other.value >> (other.bitsize - 1)) & 1
+        maxbit=max(self.bitsize,other.bitsize)
+        a = self.value
+        b = other.value
+        if asig == 1:
+            a = two_comp(self.value, self.bitsize)
+        if bsig == 1:
+            b = two_comp(other.value, other.bitsize)
+        if asig > bsig:
+            val = a+b
+            val = two_comp(val, maxbit+1)
+        elif asig < bsig:
+            val = a+b
+        elif asig and bsig:
+            val = signed_subtract(b,a,maxbit+1)
+        else:
+            val = signed_subtract(a,b,maxbit+1)
         val = self.value + two_comp(other.value, other.bitsize)
         return model_sint(val, max(self.bitsize,other.bitsize)+1)
 
@@ -53,8 +71,35 @@ class model_sint:
     # if val's MSB is 1, then find 2's complement. that is the real number
     # do operation with the real number. if MSB was 1, find 2's complement
     def sint_mul(self, other):
-        val = self.value * other.value
+        asig = (self.value >> (self.bitsize - 1)) & 1
+        bsig = (other.value >> (other.bitsize - 1)) & 1
+        a = self.value
+        b = other.value
+        if asig == 1:
+            a = two_comp(self.value, self.bitsize)
+        if bsig == 1:
+            b = two_comp(other.value, other.bitsize)
+        val = a * b
+        if asig ^ bsig:
+            val = two_comp(val, self.bitsize+other.bitsize)
         return model_sint(val, self.bitsize + other.bitsize)
+
+    def sint_div(self, other):
+        if other.value == 0:
+            print("ERROR: divide by zero")
+            return model_sint(0, self.bitsize)
+        asig = (self.value >> (self.bitsize - 1)) & 1
+        bsig = (other.value >> (other.bitsize - 1)) & 1
+        a = self.value
+        b = other.value
+        if asig == 1:
+            a = two_comp(self.value, self.bitsize)
+        if bsig == 1:
+            b = two_comp(other.value, other.bitsize)
+        val = int(a / b)
+        if asig ^ bsig:
+            val = two_comp(val, self.bitsize+1)
+        return model_sint(val, self.bitsize + 1)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1
