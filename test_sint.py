@@ -44,5 +44,30 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test3.sint_div(test1), model_sint(0x107b710ae332f,65))
         self.assertEqual(test4.sint_div(test2), model_sint(0xa4c48cb11e2b,65))
 
+    def test_mod(self):
+        self.assertEqual(test1.sint_mod(test2), model_sint(0x71e,16))
+        self.assertEqual(test3.sint_mod(test4), model_sint(0xdf8795dd56eb308,64))
+        self.assertEqual(test3.sint_mod(test1), model_sint(0x16dc,16))
+        self.assertEqual(test4.sint_mod(test2), model_sint(0xe51c,16))
+
+    def test_lt(self):
+        self.assertEqual(test1.sint_lt(test2), model_sint(0x0,1))
+        self.assertEqual(test3.sint_lt(test4), model_sint(0x0,1))
+        self.assertEqual(test6.sint_lt(test5), model_sint(0x1,1))
+        self.assertEqual(test2.sint_lt(test4), model_sint(0x0,1))
+        self.assertEqual(test4.sint_lt(test2), model_sint(0x1,1))
+
+    def test_leq(self):
+        self.assertEqual(test1.sint_leq(test2), model_sint(0x0,1))
+        self.assertEqual(test3.sint_leq(test4), model_sint(0x0,1))
+        self.assertEqual(test6.sint_leq(test6), model_sint(0x1,1))
+
+    def test_gt(self):
+        self.assertEqual(test1.sint_gt(test2), model_sint(0x1,1))
+        self.assertEqual(test3.sint_gt(test4), model_sint(0x1,1))
+        self.assertEqual(test6.sint_gt(test5), model_sint(0x0,1))
+        self.assertEqual(test2.sint_gt(test4), model_sint(0x1,1))
+        self.assertEqual(test4.sint_gt(test2), model_sint(0x0,1))
+
 if __name__=="__main__":
     unittest.main()
