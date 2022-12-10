@@ -29,6 +29,7 @@ def utos(x, w):
 
 class model_sint:
     def __init__(self, value, bitsize):
+        self.type = "sint"
         self.sign = (value >> (bitsize - 1)) & 1
         self.bitsize = bitsize
         # self.value = value
@@ -128,15 +129,69 @@ class model_sint:
             return model_sint(0x0, 1)
 
     def sint_gt(self, other):
+        if self.sign and not other.sign:
+            return model_sint(0x0, 1)
+        if not self.sign and other.sign:
+            return model_sint(0x1, 1)
         if not self.sign and not other.sign:
-            if self.value <= other.value:
+            if self.value > other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         else:
-            if self.value >= other.value:
+            if self.value < other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         
+    def sint_geq(self,other):
+        if self.sign and not other.sign:
+            return model_sint(0x0, 1)
+        if not self.sign and other.sign:
+            return model_sint(0x1, 1)
+        if not self.sign and not other.sign:
+            if self.value >= other.value:
+                return model_sint(0x1, 1)
+            return model_sint(0x0, 1)
+        else:
+            if self.value <= other.value:
+                return model_sint(0x1, 1)
+            return model_sint(0x0, 1)
+
+    def sint_eq(self, other):
+        if self.value == other.value and self.sign == other.sign:
+            return model_sint(0x1, 1)
+        return model_sint(0x0, 1)
+
+    def sint_neq(self, other):
+        if self.value == other.value  and self.sign == other.sign:
+            return model_sint(0x0, 1)
+        return model_sint(0x1, 1)
+
+    def sint_pad(self, n):
+        if n < 0:
+            print("ERROR: pad size must be positive")
+            return self
+        if n <= self.bitsize:
+            return self
+        if self.sign == 0:
+            return model_sint(self.value, n)
+        extend = (1 << (n-self.bitsize)) - 1
+        realval = two_comp(self.value, self.bitsize)
+        val = (extend << self.bitsize) | realval
+        return model_sint(val, n)
+
+    def sint_asUInt(self):
+        if self.type == "sint" and self.sign == 1:
+            val = two_comp(self.value, self.bitsize)
+        else:
+            val = self.value
+        return model_uint(val, self.bitsize)
+
+    def sint_asSInt(self):
+        if self.type == "sint" and self.sign == 1:
+            val = two_comp(self.value, self.bitsize)
+        else:
+            val = self.value
+        return model_sint(val, self.bitsize)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1

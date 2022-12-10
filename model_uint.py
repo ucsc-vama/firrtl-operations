@@ -8,6 +8,7 @@ def getbitsize(value):
 
 class model_uint:
     def __init__(self, value, bitsize=None):
+        self.type = "uint"
         if bitsize == None:
             bitsize = getbitsize(value)
         elif bitsize != 0:

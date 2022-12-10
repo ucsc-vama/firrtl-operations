@@ -70,8 +70,40 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.sint_gt(test2), model_sint(0x1,1))
         self.assertEqual(test3.sint_gt(test4), model_sint(0x1,1))
         self.assertEqual(test6.sint_gt(test5), model_sint(0x0,1))
-        self.assertEqual(test2.sint_gt(test4), model_sint(0x0,1))
-        self.assertEqual(test4.sint_gt(test2), model_sint(0x1,1))
+        self.assertEqual(test2.sint_gt(test4), model_sint(0x1,1))
+        self.assertEqual(test4.sint_gt(test2), model_sint(0x0,1))
+        self.assertEqual(test3.sint_gt(test3), model_sint(0x0,1))
+        self.assertEqual(test1.sint_gt(test3), model_sint(0x0,1))
+
+    def test_geq(self):
+        self.assertEqual(test1.sint_geq(test2), model_sint(0x1,1))
+        self.assertEqual(test3.sint_geq(test4), model_sint(0x1,1))
+        self.assertEqual(test6.sint_geq(test5), model_sint(0x0,1))
+        self.assertEqual(test2.sint_geq(test4), model_sint(0x1,1))
+        self.assertEqual(test4.sint_geq(test2), model_sint(0x0,1))
+        self.assertEqual(test3.sint_geq(test3), model_sint(0x1,1))
+
+    def test_eq(self):
+        self.assertEqual(test1.sint_eq(test1), model_sint(0x1,1))
+        self.assertEqual(test2.sint_eq(test1), model_sint(0x0,1))
+
+    def test_neq(self):
+        self.assertEqual(test1.sint_neq(test1), model_sint(0x0,1))
+        self.assertEqual(test2.sint_neq(test1), model_sint(0x1,1))
+        
+    def test_pad(self):
+        self.assertEqual(test1.sint_pad(3), model_sint(0x6dba,16))
+        self.assertEqual(test1.sint_pad(18), model_sint(0x6dba,18))
+        self.assertEqual(test2.sint_pad(20), model_sint(0xfccb2,20))
+        self.assertEqual(test3.sint_pad(200), test3.sint_pad(100).sint_pad(200))
+
+    def test_asUInt(self):
+        self.assertEqual(test1.sint_asUInt(), model_uint(0x6dba,16))
+        self.assertEqual(test2.sint_asUInt(), model_uint(0xccb2,16))
+
+    def test_asSInt(self):
+        self.assertEqual(test1.sint_asSInt(), model_sint(0x6dba,16))
+        self.assertEqual(test2.sint_asSInt(), model_sint(0xccb2,16))
 
 if __name__=="__main__":
     unittest.main()
