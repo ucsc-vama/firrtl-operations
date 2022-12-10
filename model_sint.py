@@ -94,74 +94,46 @@ class model_sint:
             print("ERROR: divide by zero")
             return model_sint(0, self.bitsize)
         minsize = min(self.bitsize, other.bitsize)
-        r = a % b
-        if asig and bsig:
+        r = self.value % other.value
+        if self.sign and other.sign:
             r = two_comp(r,minsize)
         return model_sint(r, minsize)
 
     def sint_lt(self, other):
-        asig = (self.value >> (self.bitsize - 1)) & 1
-        bsig = (other.value >> (other.bitsize - 1)) & 1
-        if asig and not bsig:
+        if self.sign and not other.sign:
             return model_sint(0x1, 1)
-        if not asig and bsig:
+        if not self.sign and other.sign:
             return model_sint(0x0, 1)
-        a = self.value
-        b = other.value
-        if asig == 1:
-            a = two_comp(self.value, self.bitsize)
-        if bsig == 1:
-            b = two_comp(other.value, other.bitsize)
-        if not asig and not bsig:
-            if a < b:
+        if not self.sign and not other.sign:
+            if self.value < other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         else:
-            if a > b:
+            if self.value > other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
 
     def sint_leq(self, other):
-        asig = (self.value >> (self.bitsize - 1)) & 1
-        bsig = (other.value >> (other.bitsize - 1)) & 1
-        if asig and not bsig:
+        if self.sign and not other.sign:
             return model_sint(0x1, 1)
-        if not asig and bsig:
+        if not self.sign and other.sign:
             return model_sint(0x0, 1)
-        a = self.value
-        b = other.value
-        if asig == 1:
-            a = two_comp(self.value, self.bitsize)
-        if bsig == 1:
-            b = two_comp(other.value, other.bitsize)
-        if not asig and not bsig:
-            if a <= b:
+        if not self.sign and not other.sign:
+            if self.value <= other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         else:
-            if a >= b:
+            if self.value >= other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
 
     def sint_gt(self, other):
-        asig = (self.value >> (self.bitsize - 1)) & 1
-        bsig = (other.value >> (other.bitsize - 1)) & 1
-        if not asig and bsig:
-            return model_sint(0x1, 1)
-        if asig and not bsig:
-            return model_sint(0x0, 1)
-        a = self.value
-        b = other.value
-        if asig == 1:
-            a = two_comp(self.value, self.bitsize)
-        if bsig == 1:
-            b = two_comp(other.value, other.bitsize)
-        if not asig and not bsig:
-            if a <= b:
+        if not self.sign and not other.sign:
+            if self.value <= other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         else:
-            if a >= b:
+            if self.value >= other.value:
                 return model_sint(0x1, 1)
             return model_sint(0x0, 1)
         
