@@ -30,9 +30,12 @@ def utos(x, w):
 class model_sint:
     def __init__(self, value, bitsize):
         self.type = "sint"
-        self.sign = (value >> (bitsize - 1)) & 1
-        self.bitsize = bitsize
-        # self.value = value
+        if bitsize <= 0:
+            self.bitsize = 1
+        else:
+            self.bitsize = bitsize
+        self.sign = (value >> (self.bitsize - 1)) & 1
+        self.realval = value
         if self.sign:
             self.value = two_comp(value, bitsize)
         else:
@@ -193,12 +196,40 @@ class model_sint:
             val = self.value
         return model_sint(val, self.bitsize)
 
+    def sint_shl(self, n):
+        if self.sign:
+            val = two_comp(self.value, self.bitsize)
+        else:
+            val = self.value
+        val = val << n
+        return model_sint(val, self.bitsize + n)
+
+    def sint_shr(self, n):
+        if self.sign:
+            val = two_comp(self.value, self.bitsize)
+        else:
+            val = self.value
+        val = val >> n
+        return model_sint(val, self.bitsize - n)
+
+    def sint_dshl(self, shift):
+        if self.sign:
+            val = two_comp(self.value, self.bitsize)
+        else:
+            val = self.value
+        newsize =  self.bitsize + 2**shift.bitsize-1
+        if self.sign:
+            extend = ((1 << (newsize-self.bitsize-shift.value))-1) << self.bitsize
+            val = val | extend
+        val <<= shift.value
+        return model_sint(val, newsize)
+
     def tohex(self):
         mask = (1<<self.bitsize)-1
         return hex(mask & self.value)
 
     def print_bits(self):
         result = "s("
-        result += hex(self.value)#self.tohex()
+        result += hex(self.realval)#self.tohex()
         result += ")"
         print(self.bitsize, result)

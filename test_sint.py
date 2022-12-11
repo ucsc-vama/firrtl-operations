@@ -105,5 +105,23 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.sint_asSInt(), model_sint(0x6dba,16))
         self.assertEqual(test2.sint_asSInt(), model_sint(0xccb2,16))
 
+    def test_shl(self):
+        self.assertEqual(test1.sint_shl(0), test1)
+        self.assertEqual(test1.sint_shl(4), model_sint(0x6dba0,20))
+        self.assertEqual(test3.sint_shl(8), model_sint(0x71088d1c4a5c4a0200,72))
+        self.assertEqual(test5.sint_shl(60), model_sint(0x381c1fe6bca6875922fe000000000000000,140))
+
+    def test_shr(self):
+        self.assertEqual(test1.sint_shr(0), test1)
+        self.assertEqual(test1.sint_shr(8), model_sint(0x6d,8))
+        self.assertEqual(test3.sint_shr(16), model_sint(0x71088d1c4a5c,48))
+        self.assertEqual(test5.sint_shr(24), model_sint(0x381c1fe6bca687,56))
+        self.assertEqual(test7.sint_shr(48), model_sint(0x6e0939370acc19daec06,80))
+        self.assertEqual(test7.sint_shr(128), model_sint(0x0,1))
+    
+    def test_dshl(self):
+        self.assertEqual(test1.sint_dshl(model_sint(0x0,1)), model_sint(0x6dba,17))
+        self.assertEqual(test1.sint_dshl(model_sint(0x4,4)), model_sint(0x6dba0,31))
+
 if __name__=="__main__":
     unittest.main()
