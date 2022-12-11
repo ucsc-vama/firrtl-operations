@@ -213,16 +213,21 @@ class model_sint:
         return model_sint(val, self.bitsize - n)
 
     def sint_dshl(self, shift):
-        if self.sign:
-            val = two_comp(self.value, self.bitsize)
-        else:
-            val = self.value
+        val = self.realval
         newsize =  self.bitsize + 2**shift.bitsize-1
         if self.sign:
             extend = ((1 << (newsize-self.bitsize-shift.value))-1) << self.bitsize
             val = val | extend
         val <<= shift.value
         return model_sint(val, newsize)
+
+    def sint_dshr(self, shift):
+        val = self.realval
+        val >>= shift.value
+        if self.sign:
+            extend = ((1 << shift.value)-1) << (self.bitsize-shift.value)
+            val = val | extend
+        return model_sint(val, self.bitsize)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1

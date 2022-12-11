@@ -123,5 +123,10 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.sint_dshl(model_sint(0x0,1)), model_sint(0x6dba,17))
         self.assertEqual(test1.sint_dshl(model_sint(0x4,4)), model_sint(0x6dba0,31))
 
+    def test_dshr(self):
+        self.assertEqual(test1.sint_dshr(model_sint(0x0,1)), model_sint(0x6dba,16))
+        self.assertEqual(test1.sint_dshr(model_sint(0x4,4)), model_sint(0x06db,16))
+        self.assertEqual(test3.sint_dshr(model_sint(0x8,4)), model_sint(0x71088d1c4a5c4a,64))
+
 if __name__=="__main__":
     unittest.main()
