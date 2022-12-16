@@ -182,19 +182,15 @@ class model_sint:
         val = (extend << self.bitsize) | realval
         return model_sint(val, n)
 
-    def sint_asUInt(self):
-        if self.type == "sint" and self.sign == 1:
+    def sint_asUInt(self):#cant figure out the difference between asUInt and cvt
+        if self.sign:
             val = two_comp(self.value, self.bitsize)
         else:
             val = self.value
         return model_uint(val, self.bitsize)
 
     def sint_asSInt(self):
-        if self.type == "sint" and self.sign == 1:
-            val = two_comp(self.value, self.bitsize)
-        else:
-            val = self.value
-        return model_sint(val, self.bitsize)
+        return self
 
     def sint_shl(self, n):
         if self.sign:
@@ -228,6 +224,15 @@ class model_sint:
             extend = ((1 << shift.value)-1) << (self.bitsize-shift.value)
             val = val | extend
         return model_sint(val, self.bitsize)
+
+    def sint_cvt(self): #cant figure out the difference between asUInt and cvt
+        return self
+
+    def sint_neg(self):
+        val = two_comp(self.realval, self.bitsize)
+        if not self.sign:
+            val = val | (1<<self.bitsize)
+        return model_sint(val, self.bitsize+1)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1
