@@ -13,6 +13,7 @@ test5 = model_sint(0x381c1fe6bca6875922fe, 80)
 test6 = model_sint(0xefbe8ae0d38ab7f36dda, 80)
 test7 = model_sint(0x6e0939370acc19daec06e9c13db50674, 128)
 test8 = model_sint(0xbeb828fdbac591dba8e38eeb433f563d, 128)
+test9 = model_sint(0x381c1fe6bca6875922fe381c1fe6bca6875922fe, 158)
 
 
 class TestOperations(unittest.TestCase):
@@ -134,6 +135,25 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test5.sint_neg().sint_neg(), test5.sint_pad(82))
         self.assertEqual(test6.sint_neg(), model_sint(0x1041751f2c75480c9226, 81))
         self.assertEqual(test4.sint_neg().sint_neg(), test4.sint_pad(66))
+
+    def test_not(self):
+        self.assertEqual(test1.sint_not(), model_uint(0x9245,16))
+        self.assertEqual(test2.sint_not(), model_uint(0x334d,16))
+        self.assertEqual(test7.sint_not(), model_uint(0x91f6c6c8f533e62513f9163ec24af98b,128))
+        self.assertEqual(test9.sint_not(), model_uint(0x07e3e019435978a6dd01c7e3e019435978a6dd01, 158))
+        self.assertEqual(test00.sint_not(), model_uint(0x6,4))
+
+    def test_and(self):
+        self.assertEqual(test1.sint_and(test2), model_uint(0x4cb2,16))
+        self.assertEqual(test5.sint_and(test6), model_uint(0x281c0ae09082875120da,80))
+
+    def test_or(self):
+        self.assertEqual(test1.sint_or(test2), model_uint(0xedba,16))
+        self.assertEqual(test5.sint_or(test6), model_uint(0xffbe9fe6ffaeb7fb6ffe,80))
+
+    def test_xor(self):
+        self.assertEqual(test1.sint_xor(test2), model_uint(0xa108,16))
+        self.assertEqual(test5.sint_xor(test6), model_uint(0xd7a295066f2c30aa4f24,80))
 
 if __name__=="__main__":
     unittest.main()

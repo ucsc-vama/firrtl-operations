@@ -234,6 +234,39 @@ class model_sint:
             val = val | (1<<self.bitsize)
         return model_sint(val, self.bitsize+1)
 
+    def sint_not(self):
+        result = 0
+        for i in range(self.bitsize):
+            result |= ((~self.realval>>i)&1) << i
+        return model_uint(result, self.bitsize)
+
+    def sint_and(self, other):
+        result = 0
+        maxbits = max(self.bitsize, other.bitsize)
+        a = model_sint(self.realval, self.bitsize).sint_pad(maxbits)
+        b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
+        for i in range(maxbits):
+            result |= ((a.realval>>i)&1 & (b.realval>>i)&1) << i
+        return model_uint(result, maxbits)
+
+    def sint_or(self, other):
+        result = 0
+        maxbits = max(self.bitsize, other.bitsize)
+        a = model_sint(self.realval, self.bitsize).sint_pad(maxbits)
+        b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
+        for i in range(maxbits):
+            result |= ((a.realval>>i)&1 | (b.realval>>i)&1) << i
+        return model_uint(result, maxbits)
+
+    def sint_xor(self, other):
+        result = 0
+        maxbits = max(self.bitsize, other.bitsize)
+        a = model_sint(self.realval, self.bitsize).sint_pad(maxbits)
+        b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
+        for i in range(maxbits):
+            result |= ((a.realval>>i)&1 ^ (b.realval>>i)&1) << i
+        return model_uint(result, maxbits)
+
     def tohex(self):
         mask = (1<<self.bitsize)-1
         return hex(mask & self.value)
