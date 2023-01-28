@@ -1,4 +1,4 @@
-from model_uint import *
+import uint
 
 def two_comp(val, bits):
     val = val ^ ( (1 << bits) - 1)
@@ -42,7 +42,7 @@ class model_sint:
             self.value = value
 
     def __eq__ (self, other):
-        if isinstance(other, model_uint) or isinstance(other, model_sint):
+        if isinstance(other, uint.model_uint) or isinstance(other, model_sint):
             if self.value == other.value and self.bitsize == other.bitsize:
                 return True
         return False
@@ -187,7 +187,7 @@ class model_sint:
             val = two_comp(self.value, self.bitsize)
         else:
             val = self.value
-        return model_uint(val, self.bitsize)
+        return uint.model_uint(val, self.bitsize)
 
     def sint_asSInt(self):
         return self
@@ -238,7 +238,7 @@ class model_sint:
         result = 0
         for i in range(self.bitsize):
             result |= ((~self.realval>>i)&1) << i
-        return model_uint(result, self.bitsize)
+        return uint.model_uint(result, self.bitsize)
 
     def sint_and(self, other):
         result = 0
@@ -247,7 +247,7 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 & (b.realval>>i)&1) << i
-        return model_uint(result, maxbits)
+        return uint.model_uint(result, maxbits)
 
     def sint_or(self, other):
         result = 0
@@ -256,7 +256,7 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 | (b.realval>>i)&1) << i
-        return model_uint(result, maxbits)
+        return uint.model_uint(result, maxbits)
 
     def sint_xor(self, other):
         result = 0
@@ -265,7 +265,31 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 ^ (b.realval>>i)&1) << i
-        return model_uint(result, maxbits)
+        return uint.model_uint(result, maxbits)
+
+    def sint_andr(self):
+        result = 1
+        for i in range(self.bitsize):
+            bit_i = (self.realval & (1<<i))>>i
+            result = result & bit_i
+        return uint.model_uint(result, 1)
+
+    def sint_orr(self):
+        result = 0
+        for i in range(self.bitsize):
+            bit_i = (self.realval & (1<<i))>>i
+            result = result | bit_i
+        return uint.model_uint(result, 1)
+
+    def sint_xorr(self):
+        result = 0
+        for i in range(self.bitsize):
+            bit_i = (self.realval & (1<<i))>>i
+            result = result ^ bit_i
+        return uint.model_uint(result, 1)
+
+    def sint_cat(self, other):
+        return uint.model_uint((self.realval<<other.bitsize)|other.realval, self.bitsize+other.bitsize)
 
     def tohex(self):
         mask = (1<<self.bitsize)-1

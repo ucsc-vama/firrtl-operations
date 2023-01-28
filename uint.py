@@ -1,5 +1,7 @@
 from math import *
-from model_sint import *
+# from model_sint import *
+# from model_sint import model_sint
+import sint
 
 def getbitsize(value):
     if value == 0:
@@ -22,7 +24,7 @@ class model_uint:
         self.value = value
 
     def __eq__ (self, other):
-        if isinstance(other, model_uint) or isinstance(other, model_sint):
+        if isinstance(other, model_uint) or isinstance(other, sint.model_sint):
             if self.value == other.value and self.bitsize == other.bitsize:
                 return True
         return False
@@ -91,7 +93,7 @@ class model_uint:
         return model_uint(self.value, self.bitsize)
 
     def uint_asSint(self): #
-        return model_sint(self.value, self.bitsize)
+        return sint.model_sint(self.value, self.bitsize)
     
     def uint_shl(self, n):
         num = self.value << n
@@ -110,7 +112,7 @@ class model_uint:
         return model_uint(num, self.bitsize)
 
     def uint_cvt(self): #
-        return model_sint(self.value, self.bitsize+1)
+        return sint.model_sint(self.value, self.bitsize+1)
 
     def uint_neg(self): #
         result = 0
@@ -118,7 +120,7 @@ class model_uint:
             result |= ((~self.value>>i)&1) << i
         result += 1
         result |= (1<<self.bitsize)
-        return model_sint(result, self.bitsize+1)
+        return sint.model_sint(result, self.bitsize+1)
 
     def uint_not(self):
         result = 0
