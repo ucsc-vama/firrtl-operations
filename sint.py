@@ -291,6 +291,26 @@ class model_sint:
     def sint_cat(self, other):
         return uint.model_uint((self.realval<<other.bitsize)|other.realval, self.bitsize+other.bitsize)
 
+    def sint_bits(self, hi, lo):
+        if hi > lo and hi < self.bitsize:
+            return uint.model_uint((self.realval>>lo)&(2**(hi-lo+1)-1), hi-lo+1)
+        if hi == lo:
+            return uint.model_uint(0,0)
+        return uint.model_uint(0,1)
+
+    def sint_head(self, n):
+        if n >= 0 and n <= self.bitsize:
+            return uint.model_uint(self.realval>>(self.bitsize-n), n)
+        return uint.model_uint(0,1)
+
+    def sint_tail(self, n):
+        if n == self.bitsize:
+            return uint.model_uint(0,0)
+        if self.bitsize > n:
+            return uint.model_uint(self.realval & (2**(self.bitsize-n)-1), self.bitsize-n)
+        print("tail: this should not happen")
+        return uint.model_uint(0,0)
+
     def tohex(self):
         mask = (1<<self.bitsize)-1
         return hex(mask & self.value)

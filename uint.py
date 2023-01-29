@@ -170,7 +170,7 @@ class model_uint:
 
     def uint_head(self, n):
         if n >= 0 and n <= self.bitsize:
-            return model_uint(self.value>>(self.bitsize-n), n)
+            return model_uint(self.realval>>(self.bitsize-n), n)
         return model_uint(0,1)
 
     def uint_tail(self, n):

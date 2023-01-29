@@ -189,5 +189,22 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test00.sint_cat(test0000), uint.model_uint(0x93, 8))
         self.assertEqual(test9.sint_cat(test5), uint.model_uint(0x381c1fe6bca6875922fe381c1fe6bca6875922fe381c1fe6bca6875922fe, 238))
 
+    def test_bits(self):
+        self.assertEqual(test1.sint_bits(15,3), uint.model_uint(0x0db7, 13))
+        self.assertEqual(test3.sint_bits(32,13), uint.model_uint(0x252e2, 20))
+        self.assertEqual(test6.sint_bits(72,59), uint.model_uint(0x37d1, 14))
+        self.assertEqual(test9.sint_bits(102,72), uint.model_uint(0x5922fe38, 31))
+
+    def test_head(self):
+        self.assertEqual(test0000.sint_head(3), uint.model_uint(0x1,3))
+        self.assertEqual(test1.sint_head(3), uint.model_uint(0x3,3))
+        self.assertEqual(test9.sint_head(63), uint.model_uint(0x70383fcd794d0eb2,63))
+
+    def test_tail(self):
+        self.assertEqual(test0000.sint_tail(3), uint.model_uint(0x1,1))
+        self.assertEqual(test1.sint_tail(3), uint.model_uint(0x0dba,13))
+        self.assertEqual(test6.sint_tail(79), uint.model_uint(0x0,1))
+        self.assertEqual(test9.sint_tail(63), uint.model_uint(0x22fe381c1fe6bca6875922fe,95))
+
 if __name__=="__main__":
     unittest.main()
