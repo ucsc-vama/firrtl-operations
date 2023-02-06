@@ -1,1 +1,1 @@
-__all__ = ["model_uint", "model_sint"]
+__all__ = ["uint", "sint"]
