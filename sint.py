@@ -1,4 +1,5 @@
 import uint
+from math import *
 
 def two_comp(val, bits):
     val = val ^ ( (1 << bits) - 1)
@@ -26,11 +27,18 @@ def utos(x, w):
         return (x - 2**w)*-1
     else:
         return x
+    
+def getbitsize(value):
+    if value == 0:
+        return 1
+    return ceil(log2(value+1))
 
 class model_sint:
-    def __init__(self, value, bitsize):
+    def __init__(self, value, bitsize=None):
         self.type = "sint"
-        if bitsize <= 0:
+        if bitsize == None:
+            bitsize = getbitsize(value)
+        elif bitsize <= 0:
             self.bitsize = 1
         else:
             self.bitsize = bitsize
