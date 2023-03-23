@@ -299,8 +299,8 @@ class model_sint:
 
     def sint_cat(self, other):
         if other.value == 0:
-            return uint.model_uint(self.realval, self.bitsize+other.bitsize)
-        return uint.model_uint((self.realval<<other.bitsize)|other.realval, self.bitsize+other.bitsize)
+            return model_sint(self.realval, self.bitsize+other.bitsize)
+        return model_sint((self.realval<<other.bitsize)|other.realval, self.bitsize+other.bitsize)
 
     def sint_bits(self, hi, lo):
         if hi > lo and hi < self.bitsize:
