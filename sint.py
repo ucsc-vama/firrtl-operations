@@ -39,13 +39,14 @@ class model_sint:
         if bitsize == None:
             self.bitsize = getbitsize(value)
         elif bitsize <= 0:
-            self.bitsize = 1
+                print("incorrect bitsize")
+                self.bitsize=1
         else:
             self.bitsize = bitsize
         self.sign = (value >> (self.bitsize - 1)) & 1
         self.realval = value
         if self.sign:
-            self.value = two_comp(value, bitsize)
+            self.value = two_comp(value, self.bitsize)
         else:
             self.value = value
 
