@@ -57,8 +57,8 @@ class model_sint:
         elif self.sign and not other.sign:
             val = signed_subtract(other.value, self.value, maxbit+1)
         elif not self.sign and other.sign:
-            val = signed_subtract(other.value, self.value, maxbit+1)
-        else: # not self.sign and not other.sign:
+            val = signed_subtract(self.value, other.value, maxbit+1)
+        else: # not self.sign andnot  other.sign:
             val = self.value + other.value
         return model_sint(val, maxbit+1)
 
@@ -204,7 +204,7 @@ class model_sint:
         if self.sign:
             val = two_comp(self.value, self.bitsize)
         else:
-            val = self.value
+            val = self.realval
         val = val >> n
         return model_sint(val, self.bitsize - n)
 
