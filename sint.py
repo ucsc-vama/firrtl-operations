@@ -37,7 +37,7 @@ class model_sint:
     def __init__(self, value, bitsize=None):
         self.type = "sint"
         if bitsize == None:
-            bitsize = getbitsize(value)
+            self.bitsize = getbitsize(value)
         elif bitsize <= 0:
             self.bitsize = 1
         else:
