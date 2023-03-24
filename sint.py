@@ -11,10 +11,10 @@ def signed_subtract(a,b,bits):
         return two_comp(b-a, bits)
     return a - b
     
-def signed_add(a,b,bits):
-    if a + b < 0:
-        return two_comp(b-a, bits)
-    return a + b 
+# def signed_add(a,b,bits):
+#     if a + b < 0:
+#         return two_comp(b-a, bits)
+#     return a + b 
 
 def signed(x,w):
     if (x >= 0):
