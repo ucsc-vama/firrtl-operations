@@ -2,6 +2,8 @@ import sint
 import uint
 import unittest
 
+testa = sint.model_sint(0x1, 1)
+testb = sint.model_sint(0x0, 1)
 test0 = sint.model_sint(0xa, 4)
 test00 = sint.model_sint(0x9, 4)
 test000 = sint.model_sint(0x9, 4)
@@ -185,9 +187,9 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test9.sint_xorr(), uint.model_uint(0x0, 1))
 
     def test_cat(self):
-        self.assertEqual(test1.sint_cat(test2), uint.model_uint(0x6dbaccb2, 32))
-        self.assertEqual(test00.sint_cat(test0000), uint.model_uint(0x93, 8))
-        self.assertEqual(test9.sint_cat(test5), uint.model_uint(0x381c1fe6bca6875922fe381c1fe6bca6875922fe381c1fe6bca6875922fe, 238))
+        self.assertEqual(test1.sint_cat(test2), sint.model_sint(0x6dbaccb2, 32))
+        self.assertEqual(test00.sint_cat(test0000), sint.model_sint(0x93, 8))
+        self.assertEqual(test9.sint_cat(test5), sint.model_sint(0x381c1fe6bca6875922fe381c1fe6bca6875922fe381c1fe6bca6875922fe, 238))
 
     def test_bits(self):
         self.assertEqual(test1.sint_bits(15,3), uint.model_uint(0x0db7, 13))

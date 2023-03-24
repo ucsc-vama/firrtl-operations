@@ -39,7 +39,7 @@ class model_sint:
         if bitsize == None:
             self.bitsize = getbitsize(value)
         elif bitsize <= 0:
-                print("incorrect bitsize")
+                # print("incorrect bitsize")
                 self.bitsize=1
         else:
             self.bitsize = bitsize
@@ -299,7 +299,7 @@ class model_sint:
 
     def sint_cat(self, other):
         if other.value == 0:
-            return model_sint(self.realval, self.bitsize+other.bitsize)
+            return model_sint((self.realval<<other.bitsize), self.bitsize+other.bitsize)
         return model_sint((self.realval<<other.bitsize)|other.realval, self.bitsize+other.bitsize)
 
     def sint_bits(self, hi, lo):
