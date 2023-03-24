@@ -256,7 +256,7 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 & (b.realval>>i)&1) << i
-        return uint.model_uint(result, maxbits)
+        return model_sint(result, maxbits)
 
     def sint_or(self, other):
         result = 0
@@ -265,7 +265,7 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 | (b.realval>>i)&1) << i
-        return uint.model_uint(result, maxbits)
+        return model_sint(result, maxbits)
 
     def sint_xor(self, other):
         result = 0
@@ -274,28 +274,28 @@ class model_sint:
         b = model_sint(other.realval, other.bitsize).sint_pad(maxbits)
         for i in range(maxbits):
             result |= ((a.realval>>i)&1 ^ (b.realval>>i)&1) << i
-        return uint.model_uint(result, maxbits)
+        return model_sint(result, maxbits)
 
     def sint_andr(self):
         result = 1
         for i in range(self.bitsize):
             bit_i = (self.realval & (1<<i))>>i
             result = result & bit_i
-        return uint.model_uint(result, 1)
+        return model_sint(result, 1)
 
     def sint_orr(self):
         result = 0
         for i in range(self.bitsize):
             bit_i = (self.realval & (1<<i))>>i
             result = result | bit_i
-        return uint.model_uint(result, 1)
+        return model_sint(result, 1)
 
     def sint_xorr(self):
         result = 0
         for i in range(self.bitsize):
             bit_i = (self.realval & (1<<i))>>i
             result = result ^ bit_i
-        return uint.model_uint(result, 1)
+        return model_sint(result, 1)
 
     def sint_cat(self, other):
         if other.value == 0:

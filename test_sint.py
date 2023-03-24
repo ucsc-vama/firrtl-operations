@@ -147,44 +147,44 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test00.sint_not(), uint.model_uint(0x6,4))
 
     def test_and(self):
-        self.assertEqual(test1.sint_and(test2), uint.model_uint(0x4cb2,16))
-        self.assertEqual(test5.sint_and(test6), uint.model_uint(0x281c0ae09082875120da,80))
+        self.assertEqual(test1.sint_and(test2), sint.model_sint(0x4cb2,16))
+        self.assertEqual(test5.sint_and(test6), sint.model_sint(0x281c0ae09082875120da,80))
 
     def test_or(self):
-        self.assertEqual(test1.sint_or(test2), uint.model_uint(0xedba,16))
-        self.assertEqual(test5.sint_or(test6), uint.model_uint(0xffbe9fe6ffaeb7fb6ffe,80))
+        self.assertEqual(test1.sint_or(test2), sint.model_sint(0xedba,16))
+        self.assertEqual(test5.sint_or(test6), sint.model_sint(0xffbe9fe6ffaeb7fb6ffe,80))
 
     def test_xor(self):
-        self.assertEqual(test1.sint_xor(test2), uint.model_uint(0xa108,16))
-        self.assertEqual(test5.sint_xor(test6), uint.model_uint(0xd7a295066f2c30aa4f24,80))
+        self.assertEqual(test1.sint_xor(test2), sint.model_sint(0xa108,16))
+        self.assertEqual(test5.sint_xor(test6), sint.model_sint(0xd7a295066f2c30aa4f24,80))
 
     def test_andr(self):
-        self.assertEqual(test00.sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test1.sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test2.sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test5.sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test9.sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(uint.model_uint(0x0,16).uint_not().uint_asSint().sint_andr(), uint.model_uint(0x1, 1))
+        self.assertEqual(test00.sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test1.sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test2.sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test5.sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test9.sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(uint.model_uint(0x0,16).uint_not().uint_asSint().sint_andr(), sint.model_sint(0x1, 1))
 
     def test_orr(self):
-        self.assertEqual(test00.sint_orr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test1.sint_orr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test2.sint_orr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test5.sint_orr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test9.sint_orr(), uint.model_uint(0x1, 1))
-        self.assertEqual(sint.model_sint(0x0,16).sint_orr(), uint.model_uint(0x0, 1))
-        self.assertEqual(sint.model_sint(0x0,69).sint_orr(), uint.model_uint(0x0, 1))
-        self.assertEqual(sint.model_sint(0x0,16).sint_andr(), uint.model_uint(0x0, 1))
-        self.assertEqual(sint.model_sint(0x0,69).sint_andr(), uint.model_uint(0x0, 1))
+        self.assertEqual(test00.sint_orr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test1.sint_orr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test2.sint_orr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test5.sint_orr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test9.sint_orr(), sint.model_sint(0x1, 1))
+        self.assertEqual(sint.model_sint(0x0,16).sint_orr(), sint.model_sint(0x0, 1))
+        self.assertEqual(sint.model_sint(0x0,69).sint_orr(), sint.model_sint(0x0, 1))
+        self.assertEqual(sint.model_sint(0x0,16).sint_andr(), sint.model_sint(0x0, 1))
+        self.assertEqual(sint.model_sint(0x0,69).sint_andr(), sint.model_sint(0x0, 1))
 
     def test_xorr(self):
-        self.assertEqual(test00.sint_xorr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test1.sint_xorr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test2.sint_xorr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test3.sint_xorr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test4.sint_xorr(), uint.model_uint(0x1, 1))
-        self.assertEqual(test5.sint_xorr(), uint.model_uint(0x0, 1))
-        self.assertEqual(test9.sint_xorr(), uint.model_uint(0x0, 1))
+        self.assertEqual(test00.sint_xorr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test1.sint_xorr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test2.sint_xorr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test3.sint_xorr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test4.sint_xorr(), sint.model_sint(0x1, 1))
+        self.assertEqual(test5.sint_xorr(), sint.model_sint(0x0, 1))
+        self.assertEqual(test9.sint_xorr(), sint.model_sint(0x0, 1))
 
     def test_cat(self):
         self.assertEqual(test1.sint_cat(test2), sint.model_sint(0x6dbaccb2, 32))
