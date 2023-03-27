@@ -202,19 +202,19 @@ class model_sint:
         return self
 
     def sint_shl(self, n):
-        # if self.sign:
-        #     val = two_comp(self.value, self.bitsize)
+        val = self.value << n
+        if self.sign:
+            val = two_comp(self.value, self.bitsize)
         # else:
         #     val = self.value
-        val = self.value << n
         return model_sint(val, self.bitsize + n)
 
     def sint_shr(self, n):
-        # if self.sign:
-        #     val = two_comp(self.value, self.bitsize)
+        val = self.value >> n
+        if self.sign:
+            val = two_comp(self.value, self.bitsize)
         # else:
         #     val = self.realval
-        val = self.value >> n
         return model_sint(val, self.bitsize - n)
 
     def sint_dshl(self, shift):

@@ -4,6 +4,7 @@ import unittest
 
 testa = sint.model_sint(0x1, 1)
 testb = sint.model_sint(0x0, 1)
+testd = sint.model_sint(0x3, 1)
 test0 = sint.model_sint(0xa, 4)
 test00 = sint.model_sint(0x9, 4)
 test000 = sint.model_sint(0x9, 4)
@@ -124,7 +125,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
-        # testa.sint_dshl(uint.model_uint(0x0,1)).print_bits()
+        testd.sint_dshr(uint.model_uint(0x1,1)).print_bits()
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,17))
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x4,4)), sint.model_sint(0x6dba0,31))
 
