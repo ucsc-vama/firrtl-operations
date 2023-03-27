@@ -5,7 +5,7 @@ import unittest
 testa = sint.model_sint(0x0, 1)
 testb = sint.model_sint(0x1, 1)
 testc = sint.model_sint(0x2, 1)
-testd = sint.model_sint(0x3, 1)
+testd = sint.model_sint(0x3, 2)
 test0 = sint.model_sint(0xa, 4)
 test00 = sint.model_sint(0x9, 4)
 test000 = sint.model_sint(0x9, 4)
@@ -118,6 +118,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test5.sint_shl(60), sint.model_sint(0x381c1fe6bca6875922fe000000000000000,140))
 
     def test_shr(self):
+        # self.assertEqual(testd.sint_shr(2), sint.model_sint(0x1,1))
         self.assertEqual(test1.sint_shr(0), test1)
         self.assertEqual(test1.sint_shr(8), sint.model_sint(0x6d,8))
         self.assertEqual(test3.sint_shr(16), sint.model_sint(0x71088d1c4a5c,48))
@@ -126,8 +127,8 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
-        # testc.sint_shr(1).print_bits()
-        # testd.sint_shl(1).print_bits()
+        testd.sint_shr(2).print_bits()
+        testd.sint_shl(1).print_bits()
 
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,17))
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x4,4)), sint.model_sint(0x6dba0,31))
