@@ -2,8 +2,9 @@ import sint
 import uint
 import unittest
 
-testa = sint.model_sint(0x1, 1)
-testb = sint.model_sint(0x0, 1)
+testa = sint.model_sint(0x0, 1)
+testb = sint.model_sint(0x1, 1)
+testc = sint.model_sint(0x2, 1)
 testd = sint.model_sint(0x3, 1)
 test0 = sint.model_sint(0xa, 4)
 test00 = sint.model_sint(0x9, 4)
@@ -125,7 +126,9 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
-        testd.sint_dshr(uint.model_uint(0x1,1)).print_bits()
+        # testc.sint_shr(1).print_bits()
+        # testd.sint_shl(1).print_bits()
+
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,17))
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x4,4)), sint.model_sint(0x6dba0,31))
 

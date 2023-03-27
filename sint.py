@@ -202,17 +202,17 @@ class model_sint:
         return self
 
     def sint_shl(self, n):
-        val = self.value << n
-        if self.sign:
-            val = two_comp(self.value, self.bitsize)
+        val = self.realval << n
+        # if self.sign:
+        #     val = two_comp(self.value, self.bitsize)
         # else:
         #     val = self.value
         return model_sint(val, self.bitsize + n)
 
     def sint_shr(self, n):
-        val = self.value >> n
-        if self.sign:
-            val = two_comp(self.value, self.bitsize)
+        val = self.realval >> n
+        # if self.sign:
+        #     val = two_comp(self.value, self.bitsize)
         # else:
         #     val = self.realval
         return model_sint(val, self.bitsize - n)
@@ -329,7 +329,7 @@ class model_sint:
         return hex(mask & self.value)
 
     def print_bits(self):
-        result = "s("
+        result = "realval: s("
         result += hex(self.realval)#self.tohex()
         result += ")"
         print(self.bitsize, result)
