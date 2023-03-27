@@ -124,6 +124,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
+        testa.sint_dshl(uint.model_uint(0x0,1)).print_bits()
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,17))
         self.assertEqual(test1.sint_dshl(sint.model_sint(0x4,4)), sint.model_sint(0x6dba0,31))
 

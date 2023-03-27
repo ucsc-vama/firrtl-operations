@@ -220,10 +220,12 @@ class model_sint:
     def sint_dshl(self, shift):
         val = self.realval
         newsize =  self.bitsize + 2**shift.bitsize-1
+        val = self.value << shift.value
         if self.sign:
-            extend = ((1 << (newsize-self.bitsize-shift.value))-1) << self.bitsize
+            # extend = ((1 << (newsize-self.bitsize))-1) << self.bitsize
+            extend = 1 << self.bitsize
             val = val | extend
-        val <<= shift.value
+        # val <<= shift.value
         return model_sint(val, newsize)
 
     def sint_dshr(self, shift):
