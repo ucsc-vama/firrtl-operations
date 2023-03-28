@@ -74,7 +74,8 @@ class model_sint:
     def sint_sub(self, other):
         maxbit=max(self.bitsize,other.bitsize)
         if self.sign and other.sign:
-            val = signed_subtract(self.value, other.value, maxbit+1)
+            # val = signed_subtract(self.value, other.value, maxbit+1)
+            val = signed_subtract(other.value, self.value, maxbit+1)
         elif self.sign and not other.sign:
             val = two_comp(self.value + other.value, maxbit+1)
         elif not self.sign and other.sign:
