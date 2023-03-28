@@ -127,13 +127,16 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
-        testd.sint_shr(2).print_bits()
-        testd.sint_shl(1).print_bits()
+        # testd.sint_shr(2).print_bits()
+        # testd.sint_shl(1).print_bits()
+        # testd.sint_dshl(uint.model_uint(0x2,2)).print_bits()
 
-        self.assertEqual(test1.sint_dshl(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,17))
-        self.assertEqual(test1.sint_dshl(sint.model_sint(0x4,4)), sint.model_sint(0x6dba0,31))
+        self.assertEqual(test1.sint_dshl(uint.model_uint(0x0,1)), sint.model_sint(0x6dba,17))
+        self.assertEqual(test1.sint_dshl(uint.model_uint(0x4,4)), sint.model_sint(0x6dba0,31))
 
     def test_dshr(self):
+        testd.sint_dshr(uint.model_uint(0x2,2)).print_bits()
+
         self.assertEqual(test1.sint_dshr(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,16))
         self.assertEqual(test1.sint_dshr(sint.model_sint(0x4,4)), sint.model_sint(0x06db,16))
         self.assertEqual(test3.sint_dshr(sint.model_sint(0x8,4)), sint.model_sint(0x71088d1c4a5c4a,64))
