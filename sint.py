@@ -212,7 +212,7 @@ class model_sint:
 
     def sint_shr(self, n):
         newlength = max(self.bitsize - n, 1)
-        if self.bitsize == n and self.sign:
+        if self.bitsize >= n and self.sign:
             return model_sint(0x1, newlength)
         val = self.realval >> n
         return model_sint(val, newlength)
