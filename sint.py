@@ -230,14 +230,15 @@ class model_sint:
 
     def sint_dshr(self, shift):
         val = self.realval
-        val >>= shift.value
         if self.sign:
-            if self.realval >= shift.value:
-                val = (1 << self.bitsize) - 1
+            if self.bitsize > shift.value:
+                val >>= shift.value
+                extend = ((2<< (shift.bitsize))-1) << (self.bitsize-shift.value)
+                val = val | extend
             else:
-                dif = shift.value - self.realval
-                dif = 1 if dif < 1 else dif
-                val = ((1 << self.bitsize - dif)-1)
+                val = (1<< self.bitsize)-1
+        else:
+            val >>= shift.value
         return model_sint(val, self.bitsize)
 
     def sint_cvt(self): #cant figure out the difference between asUInt and cvt

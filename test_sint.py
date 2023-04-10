@@ -136,7 +136,12 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.sint_dshl(uint.model_uint(0x4,4)), sint.model_sint(0x6dba0,31))
 
     def test_dshr(self):
-        self.assertEqual(testf.sint_dshr(uint.model_uint(0x5,5)), sint.model_sint(0x7,3))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x5,3)), sint.model_sint(0x7,3))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x0,1)), sint.model_sint(0x5,3))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x1,1)), sint.model_sint(0x6,3))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x2,2)), sint.model_sint(0x7,3))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x3,2)), sint.model_sint(0x7,3))
+        
 
         self.assertEqual(test1.sint_dshr(uint.model_uint(0x0,1)), sint.model_sint(0x6dba,16))
         self.assertEqual(test1.sint_dshr(uint.model_uint(0x4,4)), sint.model_sint(0x06db,16))
