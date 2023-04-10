@@ -128,7 +128,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test7.sint_shr(128), sint.model_sint(0x0,1))
     
     def test_dshl(self):
-        testf.sint_dshr(uint.model_uint(0x0,1)).print_bits()
+        # testd.sint_dshr(uint.model_uint(0x2,2)).print_bits()
         # testd.sint_shl(1).print_bits()
         # testd.sint_dshl(uint.model_uint(0x2,2)).print_bits()
 
@@ -136,9 +136,11 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.sint_dshl(uint.model_uint(0x4,4)), sint.model_sint(0x6dba0,31))
 
     def test_dshr(self):
-        self.assertEqual(test1.sint_dshr(sint.model_sint(0x0,1)), sint.model_sint(0x6dba,16))
-        self.assertEqual(test1.sint_dshr(sint.model_sint(0x4,4)), sint.model_sint(0x06db,16))
-        self.assertEqual(test3.sint_dshr(sint.model_sint(0x8,4)), sint.model_sint(0x71088d1c4a5c4a,64))
+        self.assertEqual(testf.sint_dshr(uint.model_uint(0x5,5)), sint.model_sint(0x7,3))
+
+        self.assertEqual(test1.sint_dshr(uint.model_uint(0x0,1)), sint.model_sint(0x6dba,16))
+        self.assertEqual(test1.sint_dshr(uint.model_uint(0x4,4)), sint.model_sint(0x06db,16))
+        self.assertEqual(test3.sint_dshr(uint.model_uint(0x8,4)), sint.model_sint(0x71088d1c4a5c4a,64))
 
     def test_neg(self):
         self.assertEqual(test1.sint_neg(), sint.model_sint(0x19246,17))

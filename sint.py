@@ -232,8 +232,12 @@ class model_sint:
         val = self.realval
         val >>= shift.value
         if self.sign:
-            extend = ((1 << shift.value)-1) << (self.bitsize-shift.value)
-            val = val | extend
+            if self.realval >= shift.value:
+                val = (1 << self.bitsize) - 1
+            else:
+                dif = shift.value - self.realval
+                dif = 1 if dif < 1 else dif
+                val = ((1 << self.bitsize - dif)-1)
         return model_sint(val, self.bitsize)
 
     def sint_cvt(self): #cant figure out the difference between asUInt and cvt
