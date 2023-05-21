@@ -165,6 +165,7 @@ class TestOperations(unittest.TestCase):
         self.assertEqual(test1.uint_bits(5, 1), uint.model_uint(0x0,1))
         self.assertEqual(test4.uint_bits(5, 1), uint.model_uint(0x1f,5))
         self.assertEqual(test9.uint_bits(5, 1), uint.model_uint(0xa,5))
+        self.assertEqual(test5.uint_bits(1,1), uint.model_uint(0x1,1))
 
     def test_head(self):
         self.assertEqual(test1.uint_head(5), uint.model_uint(0x0,1))
