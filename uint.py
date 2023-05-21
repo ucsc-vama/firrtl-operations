@@ -162,10 +162,8 @@ class model_uint:
         return model_uint((self.value<<other.bitsize)|other.value, self.bitsize+other.bitsize)
 
     def uint_bits(self, hi, lo):
-        if hi > lo and hi < self.bitsize:
+        if hi >= lo and hi < self.bitsize:
             return model_uint((self.value>>lo)&(2**(hi-lo+1)-1), hi-lo+1)
-        if hi == lo:
-            return model_uint(0,0)
         return model_uint(0,1)
 
     def uint_head(self, n):
